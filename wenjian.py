@@ -119,29 +119,57 @@ tell() 用于获取文件指针的位置
 # 3， 备份文件写入
 # 4， 关闭文件
 
-f = open('test.txt', "r")
-old_name = f.name
-print(old_name)
-# 处理文件名
-# 1，找到文件名中的点 最后一个点
-index = old_name.rfind(".")
-if index < 0:
-    print("文件名错误")
-    exit()
-# 2，分割文件名
-c = old_name[:index], old_name[index:]
+# f = open('test.txt', "r")
+# old_name = f.name
+# print(old_name)
+# # 处理文件名
+# # 1，找到文件名中的点 最后一个点
+# index = old_name.rfind(".")
+# if index < 0:
+#     print("文件名错误")
+#     exit()
+# # 2，分割文件名
+# c = old_name[:index], old_name[index:]
+#
+# # 3，拼接文件名
+#
+# print(c)
+# new_name = "[备份].".join(c)
+# new_f = open(new_name, "w")
+# # new_f.write(f.read())
+# # 字节读取 1024字节 循环写入
+# while True:
+#     content = f.read(1024)
+#     if len(content) == 0:
+#         break
+#     new_f.write(content)
+# f.close()
+# new_f.close()
 
-# 3，拼接文件名
+"""
+OS模块
+1，重命名
+2，删除
+3，目录操作
+"""
+import os;
+# os.rename("test.txt", "test1.txt")
+# os.remove("test1.txt")  # 系统找不到指定的文件。: 'test1.txt'  删除 文件必须存在
+# os.mkdir("test")  # 已经存在的 不能创建 [WinError 183] 当文件已存在时，无法创建该文件。: 'test'
+# os.mkdir('test/test1/test2')  # 不能同时创建多级目录
+# print(os.getcwd())  # D:\Python\code\demo1 获取当前文件的绝对路径
+# os.mkdir("aa")
 
-print(c)
-new_name = "[备份].".join(c)
-new_f = open(new_name, "w")
-# new_f.write(f.read())
-# 字节读取 1024字节 循环写入
-while True:
-    content = f.read(1024)
-    if len(content) == 0:
-        break
-    new_f.write(content)
-f.close()
-new_f.close()
+# 在aa目录下创建bb目录 先切换到aa目录 再创建bb目录
+# os.chdir("aa")  # 切换目录
+# os.mkdir("bb")
+
+# print(os.listdir())  # 获取当前目录下的所有文件和目录
+# print(os.listdir("aa"))  # 获取aa目录下的所有文件和目录
+
+# 重命名文件夹 不能跨级重命名 需要先切换到目录下
+# os.chdir("aa")
+# os.rename("bb", "bbbb")
+
+os.chdir("aa")
+os.removedirs("bbbb")
